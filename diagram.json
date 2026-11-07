@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "author": "MOHD HANAFIAH BIN YUSOFF KPM-Guru",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 48, "left": 340.84, "attrs": {} },
+    {
+      "type": "board-mfrc522",
+      "id": "rfid1",
+      "top": -81.15,
+      "left": 88.36,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 156.74,
+      "left": 173.03,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 173, "left": 528, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "oled1:GND", "esp:GND.1", "black", [ "v-48", "h115.2", "v86.4" ] ],
+    [ "oled1:VCC", "esp:5V", "red", [ "v-38.4", "h96.15", "v124.8" ] ],
+    [ "oled1:SDA", "esp:21", "blue", [ "v-28.8", "h67.27", "v124.8", "h182.4", "v-134.4" ] ],
+    [ "oled1:SCL", "esp:22", "violet", [ "v-19.2", "h67.5", "v124.8", "h172.8", "v-172.8" ] ],
+    [ "rfid1:3.3V", "esp:3V3", "red", [ "h19.2", "v115.2" ] ],
+    [ "rfid1:RST", "esp:15", "yellow", [ "h172.8", "v249.6" ] ],
+    [ "rfid1:GND", "esp:GND.2", "black", [ "h144", "v96" ] ],
+    [ "rfid1:SDA", "esp:5", "cyan", [ "h153.6", "v134.4" ] ],
+    [ "rfid1:SCK", "esp:18", "orange", [ "h192", "v134.4" ] ],
+    [ "rfid1:MOSI", "esp:23", "gray", [ "h201.6", "v76.8" ] ],
+    [ "rfid1:MISO", "esp:19", "#8f4814", [ "h220.8", "v144" ] ],
+    [ "esp:GND.3", "relay1:GND", "black", [ "h76.8", "v67.6" ] ],
+    [ "relay1:VCC", "esp:5V", "red", [ "h-19.2", "v86.4", "h-182.4", "v-28.8" ] ],
+    [ "relay1:IN", "esp:4", "orange", [ "h-28.8", "v-19.4" ] ]
+  ],
+  "dependencies": {}
+}

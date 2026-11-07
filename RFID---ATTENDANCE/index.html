@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Log Kehadiran Kolej</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f7f6; 
+            margin: 0; 
+            padding: 0; 
+            color: #333; 
+        }
+        .header-title { 
+            text-align: center; 
+            color: #0d6efd; 
+            margin-top: 30px; 
+            font-size: 28px; 
+            font-weight: bold; 
+        }
+        .tab-container { 
+            display: flex; 
+            justify-content: center; 
+            margin-top: 30px; 
+            border-bottom: 2px solid #0d6efd; 
+        }
+        .tab-button { 
+            background: none; 
+            border: none; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            color: #6c757d; 
+            font-weight: 500; 
+        }
+        .tab-button.active { 
+            color: #0d6efd; 
+            border-bottom: 3px solid #0d6efd; 
+            font-weight: bold; 
+        }
+        .content-section { 
+            display: none; 
+            max-width: 1100px; 
+            margin: 30px auto; 
+            padding: 0 20px; 
+        }
+        .content-section.active { 
+            display: block; 
+        }
+        .card { 
+            background: white; 
+            border-radius: 8px; 
+            padding: 25px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            margin-bottom: 20px; 
+        }
+        .grid-layout { 
+            display: grid; 
+            grid-template-columns: 1fr 2fr; 
+            gap: 25px; 
+        }
+        h3 { 
+            margin-top: 0; 
+            color: #212529; 
+            margin-bottom: 20px;
+        }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-size: 14px; 
+            color: #555; 
+        }
+        input[type="text"] { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 20px; 
+            border: 1px solid #ced4da; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+        }
+        .btn-simpan { 
+            background-color: #0d6efd; 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            width: 100%; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 15px; 
+            font-weight: bold; 
+        }
+        .btn-simpan:hover { 
+            background-color: #0b5ed7; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 10px; 
+            font-size: 15px; 
+        }
+        th { 
+            text-align: left; 
+            padding: 12px; 
+            color: #495057; 
+            border-bottom: 2px solid #dee2e6; 
+        }
+        td { 
+            padding: 12px; 
+            border-bottom: 1px solid #dee2e6; 
+            color: #333; 
+        }
+        .btn-padam { 
+            background-color: #dc3545; 
+            color: white; 
+            border: none; 
+            padding: 6px 15px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 14px; 
+        }
+        .btn-padam:hover { 
+            background-color: #bb2d3b; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">Sistem Log Kehadiran Kolej</div>
+
+    <div class="tab-container">
+        <button class="tab-button active" onclick="bukaTab('log-kehadiran', this)">Log Kehadiran</button>
+        <button class="tab-button" onclick="bukaTab('pengurusan-pelajar', this)">Pengurusan Pelajar</button>
+    </div>
+
+    <!-- TAB 1: LOG KEHADIRAN -->
+    <div id="log-kehadiran" class="content-section active">
+        <div class="card">
+            <h3>Rekod Kehadiran Harian</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarikh</th>
+                        <th>Masa Masuk</th>
+                        <th>Masa Keluar</th>
+                        <th>Nama Pelajar</th>
+                        <th>Kelas</th>
+                        <th>UID Kad</th>
+                    </tr>
+                </thead>
+                <tbody id="jadual-log">
+                    <!-- Data log akan masuk di sini secara automatik dari Firebase -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 2: PENGURUSAN PELAJAR -->
+    <div id="pengurusan-pelajar" class="content-section">
+        <div class="grid-layout">
+            
+            <!-- Borang Pendaftaran (Kiri) -->
+            <div class="card">
+                <h3>Daftar Pelajar Baharu</h3>
+                <label>Nama Penuh:</label>
+                <input type="text" id="nama" placeholder="Contoh: Ahmad Ali">
+                
+                <label>Kelas:</label>
+                <input type="text" id="kelas" placeholder="Contoh: 5 Sains">
+                
+                <label>Nombor ID:</label>
+                <input type="text" id="noid" placeholder="Contoh: P001">
+                
+                <label>UID Kad RFID:</label>
+                <input type="text" id="uid" placeholder="Contoh: 01 02 03 04">
+                
+                <button id="btn-simpan" class="btn-simpan">Simpan Maklumat</button>
+            </div>
+
+            <!-- Senarai Pelajar (Kanan) -->
+            <div class="card">
+                <h3>Senarai Pelajar (Had 7 Orang)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>No. ID</th>
+                            <th>UID Kad</th> <!-- LAJUR BAHARU -->
+                            <th>Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jadual-pelajar">
+                        <!-- Data pelajar akan masuk di sini secara automatik dari Firebase -->
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Skrip Ringkas untuk Fungsi Tukar Tab -->
+    <script>
+        function bukaTab(idTab, butang) {
+            // Sembunyikan semua kandungan tab
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Buang kesan warna biru (aktif) dari semua butang tab
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Paparkan kandungan tab yang dipilih sahaja
+            document.getElementById(idTab).classList.add('active');
+            // Aktifkan warna biru pada butang yang ditekan
+            butang.classList.add('active');
+        }
+    </script>
+
+    <!-- Pautan ke fail JavaScript utama anda (Pastikan nama fail adalah app.js) -->
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>

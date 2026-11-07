@@ -1,0 +1,235 @@
+/* =========================================================
+   Tetapan Asas (Pembolehubah Warna & Font)
+========================================================= */
+:root {
+    --warna-primer: #1a73e8; /* Biru korporat */
+    --warna-sekunder: #005ce6;
+    --warna-latar: #f4f7f6;
+    --warna-kad: #ffffff;
+    --warna-teks: #333333;
+    --warna-teks-cair: #5f6368;
+    --warna-padam: #e53935;
+    --garis-sempadan: #e0e0e0;
+    --bayang-kad: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--warna-latar);
+    color: var(--warna-teks);
+    line-height: 1.6;
+}
+
+/* =========================================================
+   Pengepala & Menu Navigasi (Tab)
+========================================================= */
+.pengepala {
+    background-color: var(--warna-kad);
+    box-shadow: var(--bayang-kad);
+    padding: 20px 40px 0;
+    text-align: center;
+    border-bottom: 2px solid var(--warna-primer);
+}
+
+.pengepala h1 {
+    font-size: 24px;
+    color: var(--warna-primer);
+    margin-bottom: 20px;
+}
+
+.menu-tab {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu-tab button {
+    background-color: transparent;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--warna-teks-cair);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.menu-tab button:hover {
+    color: var(--warna-primer);
+    background-color: #f0f4ff;
+    border-radius: 8px 8px 0 0;
+}
+
+.menu-tab button.aktif {
+    color: var(--warna-primer);
+    border-bottom: 3px solid var(--warna-primer);
+}
+
+/* =========================================================
+   Kandungan Utama & Pengurusan Paparan
+========================================================= */
+.kandungan-utama {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Animasi tukar tab */
+.bahagian.sembunyi {
+    display: none;
+}
+
+.bahagian.papar {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   Jadual Data (Log Kehadiran & Senarai Pelajar)
+========================================================= */
+.bekas-jadual {
+    background: var(--warna-kad);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--bayang-kad);
+    overflow-x: auto; /* Boleh scroll ke tepi di telefon */
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--warna-teks);
+}
+
+.jadual-data {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.jadual-data th, .jadual-data td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--garis-sempadan);
+}
+
+.jadual-data th {
+    background-color: #f8f9fa;
+    color: var(--warna-teks-cair);
+    font-weight: 600;
+}
+
+.jadual-data tbody tr:hover {
+    background-color: #f1f3f4;
+}
+
+/* Butang Padam dalam jadual */
+.btn-padam {
+    background-color: var(--warna-padam);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-padam:hover {
+    background-color: #c62828;
+}
+
+/* =========================================================
+   Bahagian Pengurusan (Borang & Kad)
+========================================================= */
+.susun-dua-lajur {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.kad-borang, .kad-senarai {
+    background: var(--warna-kad);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--bayang-kad);
+}
+
+.kumpulan-input {
+    margin-bottom: 15px;
+}
+
+.kumpulan-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--warna-teks-cair);
+}
+
+.kumpulan-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--garis-sempadan);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border 0.3s;
+}
+
+.kumpulan-input input:focus {
+    border-color: var(--warna-primer);
+    outline: none;
+    box-shadow: 0 0 5px rgba(26, 115, 232, 0.2);
+}
+
+.btn-tambah {
+    width: 100%;
+    background-color: var(--warna-primer);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-tambah:hover {
+    background-color: var(--warna-sekunder);
+}
+
+.mesej-amaran {
+    color: var(--warna-padam);
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* =========================================================
+   Responsif untuk Telefon Pintar (Mobile Friendly)
+========================================================= */
+@media (max-width: 768px) {
+    .susun-dua-lajur {
+        grid-template-columns: 1fr; /* Jadikan 1 lajur bersusun ke bawah */
+    }
+    
+    .menu-tab {
+        flex-direction: column;
+    }
+    
+    .pengepala {
+        padding: 15px 20px 0;
+    }
+}
